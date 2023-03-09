@@ -22,6 +22,7 @@ def check_guess(word, guess):
 
 def game_loop(word, count):
     # Display underscores for each letter in current_word with a space in between
+    # Print list of already used guesses
     # Ask for guess
     # Read guess
     # Call check_guess(current_word, guess)
@@ -29,6 +30,13 @@ def game_loop(word, count):
 
 
 if __name__ == '__main__':
+    # Display game title and current high score (stored in an external file)
+    # Ask for username and if they want to start a game
+    # Read wordlist from external JSON-file
+    # Prototype version: use hardcoded short list
     hangman_words = ["jazz", "fluff", "haphazard", "zephyr", "fishhook", "exodus"]
+    # Until GUI: Count up to 16 for every wrong guess, since the drawn hangman has 16 lines.
+    # Starting count = 0
     hangman_count = 0
+    # Select current word randomly from wordlist
     current_word = select_word(hangman_words)
