@@ -20,13 +20,36 @@ def check_guess(word, guess):
     print("Checking guess against word...")
 
 
-def game_loop(word, count):
+def game_loop(word, display_word, guesses, count):
     # Display underscores for each letter in current_word with a space in between
+    display_string = "".join(display_word)
+    print(display_string)
     # Print list of already used guesses
+    if len(guesses) > 0:
+        print("Already guessed:")
+        print(guesses)
     # Ask for guess
+    print("What letter is your next guess?")
     # Read guess
+    guess_input = input()
+    guess_letter = guess_input[0]
+    guesses.append(guess_letter)
     # Call check_guess(current_word, guess)
-    print("Doing game loop...")
+    check_guess(word, guess_letter)
+
+
+def start_game(wordlist):
+    # Resetting count and guesses in case they have content
+    hangman_count = 0
+    already_guessed = []
+    # Select current word randomly from wordlist
+    current_word = select_word(hangman_words)
+    # Prepare the displayed list of underscores for the game loop
+    display_list = []
+    for i in range(len(current_word)):
+        display_list.append("_ ")
+    # Call game loop with prepared data
+    game_loop(current_word, display_list, already_guessed, hangman_count)
 
 
 if __name__ == '__main__':
@@ -38,5 +61,5 @@ if __name__ == '__main__':
     # Until GUI: Count up to 16 for every wrong guess, since the drawn hangman has 16 lines.
     # Starting count = 0
     hangman_count = 0
-    # Select current word randomly from wordlist
-    current_word = select_word(hangman_words)
+    # Preparing list of guesses
+    already_guessed = []
