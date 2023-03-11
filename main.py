@@ -1,5 +1,6 @@
 import random
 import json
+import wordlist
 
 
 def select_word(input_list):
@@ -18,7 +19,7 @@ def check_guess(word, guess):
     # If there is a second match, append to that list.
     # Print updated word
     # If there is no match, add 1 to hangman_count and let the user know it was not a match
-    print("Checking guess against word...")
+    pass
 
 
 def game_loop(word, display_word):
@@ -40,14 +41,14 @@ def game_loop(word, display_word):
     check_guess(word, guess_letter)
 
 
-def start_game(wordlist):
+def start_game(list_of_words):
     # Resetting count and guesses in case they have content
     global hangman_count
     hangman_count = 0
     global already_guessed
     already_guessed = []
     # Select current word randomly from wordlist
-    current_word = select_word(hangman_words)
+    current_word = select_word(list_of_words)
     # Prepare the displayed list of underscores for the game loop
     display_list = []
     for i in range(len(current_word)):
@@ -57,13 +58,18 @@ def start_game(wordlist):
 
 
 if __name__ == '__main__':
-    # Display game title and current high score (stored in an external file)
-    # Ask for username and if they want to start a game
-    # Read wordlist from external file
-    # Prototype version: use hardcoded short list
-    hangman_words = ["jazz", "fluff", "haphazard", "zephyr", "fishhook", "exodus"]
+    # Prototype version: use hardcoded short list for words to choose from
+    # hangman_words = ["jazz", "fluff", "haphazard", "zephyr", "fishhook", "exodus"]
     # Until GUI: Count up to 16 for every wrong guess, since the drawn hangman has 16 lines.
     # Starting count = 0
     hangman_count = 0
     # Preparing list of guesses
     already_guessed = []
+    # Display game title and current high score (stored in an external file)
+    # Ask for username and if they want to start a game
+    print("Press y to start game.")
+    input_game_start = input()
+    if input_game_start == "y":
+        start_game(wordlist.hangman_words)
+    else:
+        print("It seems you don't want to play right now. See you around!")
