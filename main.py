@@ -1,4 +1,5 @@
 import random
+import json
 
 
 def select_word(input_list):
@@ -20,27 +21,30 @@ def check_guess(word, guess):
     print("Checking guess against word...")
 
 
-def game_loop(word, display_word, guesses, count):
+def game_loop(word, display_word):
     # Display underscores for each letter in current_word with a space in between
     display_string = "".join(display_word)
     print(display_string)
     # Print list of already used guesses
-    if len(guesses) > 0:
+    global already_guessed
+    if len(already_guessed) > 0:
         print("Already guessed:")
-        print(guesses)
+        print(already_guessed)
     # Ask for guess
     print("What letter is your next guess?")
     # Read guess
     guess_input = input()
     guess_letter = guess_input[0]
-    guesses.append(guess_letter)
+    already_guessed.append(guess_letter)
     # Call check_guess(current_word, guess)
     check_guess(word, guess_letter)
 
 
 def start_game(wordlist):
     # Resetting count and guesses in case they have content
+    global hangman_count
     hangman_count = 0
+    global already_guessed
     already_guessed = []
     # Select current word randomly from wordlist
     current_word = select_word(hangman_words)
@@ -49,13 +53,13 @@ def start_game(wordlist):
     for i in range(len(current_word)):
         display_list.append("_ ")
     # Call game loop with prepared data
-    game_loop(current_word, display_list, already_guessed, hangman_count)
+    game_loop(current_word, display_list)
 
 
 if __name__ == '__main__':
     # Display game title and current high score (stored in an external file)
     # Ask for username and if they want to start a game
-    # Read wordlist from external JSON-file
+    # Read wordlist from external file
     # Prototype version: use hardcoded short list
     hangman_words = ["jazz", "fluff", "haphazard", "zephyr", "fishhook", "exodus"]
     # Until GUI: Count up to 16 for every wrong guess, since the drawn hangman has 16 lines.
