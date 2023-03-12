@@ -1,16 +1,7 @@
 import random
 import json
 import wordlist
-
-
-def select_word(input_list):
-    # Use RNG to generate a random number between 0 and (list.len() -1)
-    rng_number = random.uniform(0, (len(input_list)-1))
-    chosen_word = input_list[rng_number]
-    result_list = []
-    for i in range(0, len(chosen_word)):
-        result_list.append(chosen_word[i])
-    return result_list
+import data
 
 
 def check_guess(word, guess):
@@ -41,6 +32,16 @@ def game_loop(word, display_word):
     check_guess(word, guess_letter)
 
 
+def select_word(input_list):
+    # Use RNG to generate a random number between 0 and (list.len() -1)
+    rng_number = random.uniform(0, (len(input_list)-1))
+    chosen_word = input_list[rng_number]
+    result_list = []
+    for i in range(0, len(chosen_word)):
+        result_list.append(chosen_word[i])
+    return result_list
+
+
 def start_game(list_of_words):
     # Resetting count and guesses in case they have content
     global hangman_count
@@ -66,6 +67,7 @@ if __name__ == '__main__':
     # Preparing list of guesses
     already_guessed = []
     # Display game title and current high score (stored in an external file)
+    print(data.menu_texts["welcome_text"])
     # Ask for username and if they want to start a game
     print("Press y to start game.")
     input_game_start = input()
